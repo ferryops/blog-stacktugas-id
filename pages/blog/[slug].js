@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import marked from "marked";
 import Link from "next/link";
+import Order from "../../components/Order";
 
 export default function PostPage({ frontmatter: { title, date, cover_image }, slug, content }) {
   return (
@@ -18,6 +19,7 @@ export default function PostPage({ frontmatter: { title, date, cover_image }, sl
           <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
         </div>
       </div>
+      <Order />
     </>
   );
 }

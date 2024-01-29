@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 p {
@@ -26,10 +26,16 @@ img {
 }
 
 header {
-  background: steelblue;
+  background: rgb(0, 0, 0);
   color: #fff;
   padding: 5px;
   margin-bottom: 40px;
+}
+
+footer {
+  background: rgb(0, 0, 0);
+  color: #fff;
+  padding: 5px;
 }
 
 header a {
@@ -41,6 +47,13 @@ header a {
   margin: auto;
   overflow: auto;
   padding: 0 10px;
+}
+
+.order {
+  padding: 10px 20px 20px 20px;
+  margin: 20px 0 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .btn {
@@ -75,6 +88,7 @@ header a {
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-top: 30px;
+  padding: 10px;
 }
 
 .card {
@@ -110,6 +124,25 @@ ol {
   padding: 20px;
   margin: 20px 0;
   line-height: 2.3;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.footer-section {
+  flex: 1;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+ul {
+  list-style: disc;
+  padding-left: 16px;
+}
+a {
+  text-decoration: none;
+  color: #fff;
 }
 
 @media (max-width: 500px) {
