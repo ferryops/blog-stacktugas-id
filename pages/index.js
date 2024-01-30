@@ -4,8 +4,39 @@ import matter from "gray-matter";
 import Head from "next/head";
 import Post from "../components/Post";
 import { sortByDate } from "../utils";
+import { useEffect, useState } from "react";
 
-export default function Home({ posts }) {
+export default function Home({ initialPosts }) {
+  const [posts, setPosts] = useState(initialPosts);
+  const [page, setPage] = useState(1);
+  const [recentfetch, setRecentFetch] = useState(false);
+
+  const fetchMorePosts = async () => {
+    const newPage = page + 1;
+    const res = await fetch(`/api/posts?page=${newPage}`);
+    const newPosts = await res.json();
+    setRecentFetch(newPosts.length > 0 ? false : true);
+
+    if (newPosts.length > 0) {
+      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+      setPage(newPage);
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+        fetchMorePosts();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [page]);
+
   return (
     <div>
       <Head>
@@ -45,23 +76,20 @@ export default function Home({ posts }) {
         {posts.map((post, index) => (
           <Post key={index} post={post} />
         ))}
+        <button className="btn" onClick={() => fetchMorePosts()}>
+          {recentfetch ? "Sudah Habis" : "Lainnya"}
+        </button>
       </div>
     </div>
   );
 }
 
 export async function getStaticProps() {
-  // Get files from the posts dir
   const files = fs.readdirSync(path.join("posts"));
 
-  // Get slug and frontmatter from posts
-  const posts = files.map((filename) => {
-    // Create slug
+  const initialPosts = files.slice(0, 6).map((filename) => {
     const slug = filename.replace(".md", "");
-
-    // Get frontmatter
     const markdownWithMeta = fs.readFileSync(path.join("posts", filename), "utf-8");
-
     const { data: frontmatter } = matter(markdownWithMeta);
 
     return {
@@ -72,7 +100,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      posts: posts.sort(sortByDate),
+      initialPosts: initialPosts.sort(sortByDate),
     },
   };
 }
