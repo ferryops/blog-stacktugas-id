@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { useState } from "react";
+import UploadImage from "../../components/UploadImage";
 
 const ArticleEditor = () => {
   const [title, setTitle] = useState("");
@@ -45,6 +46,7 @@ const ArticleEditor = () => {
         <input type="text" value={excerpt} onChange={(e) => setExcerpt(e.target.value)} placeholder="Ringkasan" />
         <input type="text" value={urlBanner} onChange={(e) => setUrlBanner(e.target.value)} placeholder="URL Banner" />
         <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Konten Format MD" />
+        <UploadImage />
 
         <button className="btn" onClick={handleSave}>
           Simpan Artikel
