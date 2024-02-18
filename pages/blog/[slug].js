@@ -5,41 +5,31 @@ import marked from "marked";
 import Link from "next/link";
 import Order from "../../components/Order";
 import Head from "next/head";
+import { siteConfig } from "../../config/site";
 
 export default function PostPage({ frontmatter: { title, date, cover_image }, slug, content }) {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{title} | blog.stacktugas.id</title>
+        <meta name="title" content={`${title} | blog.stacktugas.id`} />
         <meta name="description" content={title} />
-        <meta
-          name="keywords"
-          content="Joki Tugas, Joki Tugas Coding, Joki Tugas Pemrograman, Joki Tugas Web, Joki Tugas Murah, Joki Tugas UT, Joki Coding Python, Joki Coding Website, Joki Coding C++, Jasa Coding PHP, Joki Coding Golang, Jasa Coding Arduino, Joki Tugas Android Studio, Joki Skripsi, Joki Tugas Matematika"
-        />
-        <meta name="author" content="stacktugas.id" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="canonical" href={`https://blog.stacktugas.id/blog/${slug}`} />
+        <meta name="keywords" content={siteConfig.keywords} />
+        <meta name="author" content={siteConfig.authors[0].name} />
 
-        {/* Meta tags for SEO */}
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="distribution" content="global" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="language" content="Bahasa Indonesia" />
-
-        {/* Open Graph Meta tags for media social */}
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content="Jasa Joki Tugas Kuliah, Coding, Jaringan, Database" />
-        <meta property="og:url" content={`https://blog.stacktugas.id/blog/${slug}`} />
+        {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="URL_gambar_thumbnail" />
+        <meta property="og:url" content={`https://blog.stacktugas.id/blog/${slug}`} />
+        <meta property="og:title" content={`${title} | blog.stacktugas.id`} />
+        <meta property="og:description" content={`${title} | blog.stacktugas.id`} />
+        <meta property="og:image" content="/" />
 
-        {/* Twitter Card for Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@stacktugas_id" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content="Jasa Joki Tugas Kuliah, Coding, Jaringan, Database" />
-        <meta name="twitter:image" content="URL_gambar_thumbnail" />
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={`https://blog.stacktugas.id/blog/${slug}`} />
+        <meta property="twitter:title" content={`${title} | blog.stacktugas.id`} />
+        <meta property="twitter:description" content={`${title} | blog.stacktugas.id`} />
+        <meta property="twitter:image" content="/" />
       </Head>
       <Link href="/">
         <a className="btn btn-back">Kembali</a>
