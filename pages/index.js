@@ -38,6 +38,18 @@ export default function Home({ initialPosts }) {
     };
   }, [page]);
 
+  const fetchMorePosts = async () => {
+    const newPage = page + 1;
+    const res = await fetch(`/api/posts?page=${newPage}`);
+    const newPosts = await res.json();
+    setRecentFetch(newPosts.length > 0 ? false : true);
+
+    if (newPosts.length > 0) {
+      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+      setPage(newPage);
+    }
+  };
+
   return (
     <div>
       <Head>
